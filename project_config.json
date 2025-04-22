@@ -1,0 +1,21 @@
+{
+ "project":{
+ "name":"MyProject",
+ "version":"1.0.0",
+ "technology":"Python",
+ "mcs":"Microservices",
+
+ "artefacts": [
+      {
+        "name": "core-service",
+        "type": "py",
+        "version": "1.0.0"
+      },
+      {
+        "name": "frontend-bundle",
+        "type": "zip",
+        "version": "1.0.0"
+      }
+    ]
+  }
+}
