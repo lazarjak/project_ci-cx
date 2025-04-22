@@ -7,7 +7,6 @@ with open('project_config.json') as f:
 # Izvuci potrebne podatke
 project_name = data["project"]["name"]
 technology = data["project"]["technology"]
-repos = data["project"]["repos"]
 artefacts = data["project"]["artefacts"]
 
 

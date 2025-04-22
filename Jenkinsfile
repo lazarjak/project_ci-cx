@@ -14,10 +14,10 @@ pipeline {
                     // Generisanje artefakata
                     
         echo "Building core-service..."
-        # Build komanda za py
+        
         
         echo "Building frontend-bundle..."
-        # Build komanda za zip
+       
         
                 }
             }
