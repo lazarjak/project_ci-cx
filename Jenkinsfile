@@ -49,7 +49,7 @@ pipeline {
 
                     echo "Running frontend tests..."
                     dir('frontend') {
-                        sh 'PYTHONPATH=. pytest test_app.py'  // Pokreće testove za frontend
+                        sh 'PYTHONPATH=.:$PWD pytest test_app.py'  // Pokreće testove za frontend
                     }
                 }
             }
