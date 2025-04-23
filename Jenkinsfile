@@ -44,12 +44,12 @@ pipeline {
                 script {
                     echo "Running core tests..."
                     dir('core') {
-                        sh 'pytest projekat/test_main.py'  // Pokreće testove za core
+                        sh 'pytest test_main.py'  // Pokreće testove za core
                     }
 
                     echo "Running frontend tests..."
                     dir('frontend') {
-                        sh 'pytest projekat/test_app.py'  // Pokreće testove za frontend
+                        sh 'pytest test_app.py'  // Pokreće testove za frontend
                     }
                 }
             }
