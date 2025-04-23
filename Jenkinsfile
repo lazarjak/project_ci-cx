@@ -14,10 +14,12 @@ pipeline {
 		script {
 		    
         	echo "Cloning core..."
-        	sh 'git clone -b master https://github.com/lazarjak/core.git || exit 1'
+        	sh 'rm -rf core'
+		sh 'git clone -b master https://github.com/lazarjak/core.git || exit 1'
         
         	echo "Cloning frontend..."
-        	sh 'git clone -b master https://github.com/lazarjak/frontend.git || exit 1'
+        	sh 'rm -rf frontend'
+		sh 'git clone -b master https://github.com/lazarjak/frontend.git || exit 1'
         
 		}
 	    }
