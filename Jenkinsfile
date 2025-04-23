@@ -8,17 +8,53 @@ pipeline {
     }
 
     stages {
+
+	stage('Checkout Repositories') {
+	    steps {
+		script {
+		    
+        	echo "Cloning core..."
+        	sh 'git clone -b master https://github.com/lazarjak/core.git || exit 1'
+        
+        	echo "Cloning frontend..."
+        	sh 'git clone -b master https://github.com/lazarjak/frontend.git || exit 1'
+        
+		}
+	    }
+	}
+
         stage('Build Artefacts') {
             steps {
                 script {
                     // Generisanje artefakata
                     
-        echo "Building core-service..."
+        	    echo "Building core-service..."
         
+        	    echo "Building frontend-bundle..."
+        	
         
-        echo "Building frontend-bundle..."
-       
-        
+                }
+            }
+        }
+
+	stage('Run Services') {
+            steps {
+                script {
+                    // Pokreni core i frontend servise
+                    
+    		    echo "Running core service..."
+   		    sh '''
+			 cd core
+   			 python3 main.py || exit 1  # Pokreće main.py iz core repozitorijuma
+
+   		    '''
+
+
+    		    echo "Running frontend service..."
+   		    sh '''	
+			 cd ../frontend
+   			 python3 app.py || exit 1  # Pokreće app.py iz frontend repozitorijuma
+    		    '''
                 }
             }
         }
