@@ -52,7 +52,7 @@ pipeline {
 
     		    echo "Running frontend service..."
    		    sh '''	
-			 cd ../frontend
+			 cd frontend
    			 python3 app.py || exit 1  # Pokreće app.py iz frontend repozitorijuma
     		    '''
                 }
