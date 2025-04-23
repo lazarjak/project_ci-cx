@@ -39,6 +39,22 @@ pipeline {
             }
         }
 
+	stage('Run Tests') {
+            steps {
+                script {
+                    echo "Running core tests..."
+                    dir('core') {
+                        sh 'pytest privremeni/test_main.py'  // Pokreće testove za core
+                    }
+
+                    echo "Running frontend tests..."
+                    dir('frontend') {
+                        sh 'pytest privremeni1/test_app.py'  // Pokreće testove za frontend
+                    }
+                }
+            }
+        }
+
 	stage('Run Services') {
             steps {
                 script {
