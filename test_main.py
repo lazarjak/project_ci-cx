@@ -1,7 +1,11 @@
 import pytest
 from io import StringIO
 import sys
+<<<<<<< HEAD
 from projekat.main import main   #Importujemo funkciju main() iz main.py
+=======
+from core.main import main   #Importujemo funkciju main() iz main.py
+>>>>>>> c06e92b (Test for main.py)
 
 def test_main():
 
