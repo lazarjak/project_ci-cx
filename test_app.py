@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 from app import main
-=======
 import builtins
 import io
 
