@@ -1,4 +1,4 @@
-from frontend.app import main
+from app import main
 import builtins
 import io
 
