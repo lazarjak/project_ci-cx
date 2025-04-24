@@ -3,6 +3,7 @@ from io import StringIO
 import sys
 from main import main   #Importujemo funkciju main() iz main.py
 
+
 def test_main():
 
 	captured_output = StringIO()
