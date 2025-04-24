@@ -76,6 +76,16 @@ pipeline {
                 }
             }
         }
+	
+	stage('Deploy') {
+            steps {
+                script {
+                    // Pokreće aplikaciju u Docker kontejneru
+                    sh 'docker run -d -p 8080:8080 --name my-app-container my-app'
+                }
+            }
+        }
+
     }
 }
 
