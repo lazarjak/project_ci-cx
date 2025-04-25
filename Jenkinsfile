@@ -81,7 +81,7 @@ pipeline {
             steps {
                 script {
                     // Pokreće aplikaciju u Docker kontejneru
-                    sh 'docker run -d -p 8080:8080 --name my-app-container my-app'
+                    sh 'docker run -d -p 5001:8080 --name my-app-container my-app'
                 }
             }
         }
