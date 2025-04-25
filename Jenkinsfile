@@ -91,7 +91,7 @@ pipeline {
                                 sudo kill -9 $PID || { echo "Failed to kill process with PID $PID"; exit 1; }
                             fi
 
-                            // Now remove the container
+                           
                             docker rm -f my-app-container || { echo "Failed to remove old container"; exit 1; }
                         fi
                     '''
