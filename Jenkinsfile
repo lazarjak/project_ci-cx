@@ -83,7 +83,7 @@ pipeline {
 		    // Clean up existing container
 		    sh '''
 			if [ "$(docker ps -aq -f name=my-app-container)" ]; then
-          		  docker rm -f my-app-container
+          		  sudo docker rm -f my-app-container
         		fi
       		    '''
 
