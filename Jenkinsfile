@@ -82,20 +82,11 @@ pipeline {
                 script {
 		    // Clean up existing container
 		    sh '''
-                        CONTAINER_ID=$(docker ps -aq -f name=my-app-container)
-                        if [ -n "$CONTAINER_ID" ]; then
-                           
-                            PID=$(docker inspect --format '{{.State.Pid}}' my-app-container)
-                            if [ -n "$PID" ]; then
-                                echo "Killing process with PID $PID..."
-                                sudo kill -9 $PID || { echo "Failed to kill process with PID $PID"; exit 1; }
-                            fi
 
                            
                             docker rm -f my-app-container || { echo "Failed to remove old container"; exit 1; }
                         fi
                     '''
-
                     // Pokreće aplikaciju u Docker kontejneru
                     sh 'docker run -d -p 5001:8080 --name my-app-container my-app'
                 }
