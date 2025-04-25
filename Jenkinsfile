@@ -84,7 +84,7 @@ pipeline {
 		    sh '''
                         CONTAINER_ID=$(docker ps -aq -f name=my-app-container)
                         if [ -n "$CONTAINER_ID" ]; then
-                            // Find the process PID associated with the container
+                           
                             PID=$(docker inspect --format '{{.State.Pid}}' my-app-container)
                             if [ -n "$PID" ]; then
                                 echo "Killing process with PID $PID..."
