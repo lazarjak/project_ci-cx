@@ -80,6 +80,13 @@ pipeline {
 	stage('Deploy') {
             steps {
                 script {
+		    // Clean up existing container
+		    sh '''
+			if [ "$(docker ps -aq -f name=my-app-container)" ]; then
+          		  docker rm -f my-app-container
+        		fi
+      		    '''
+
                     // Pokreće aplikaciju u Docker kontejneru
                     sh 'docker run -d -p 5001:8080 --name my-app-container my-app'
                 }
