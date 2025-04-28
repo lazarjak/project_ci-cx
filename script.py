@@ -44,6 +44,19 @@ def generate_run_script():
     '''
     return script
 
+# Funkcija za generisanje deploy skripte
+def generate_deploy_script():
+    script = '''
+    // Clean up existing container
+    echo "Cleaning up old Docker container..."
+    docker rm -f my-app-container || { echo "Failed to remove old container"; exit 1; }
+
+    // Pokreće aplikaciju u Docker kontejneru
+    echo "Deploying new container..."
+    docker run -d -p 5001:8080 --name my-app-container my-app || exit 1
+    '''
+    return script
+
 # Sada generiši Groovy skriptu na osnovu tih podataka
 groovy_script = f'''
 pipeline {{
@@ -72,11 +85,35 @@ pipeline {{
             }}
         }}
 
+	stage('Run Tests') {{
+            steps {{
+                script {{
+                    echo "Running core tests..."
+                    dir('core') {{
+                        sh 'PYTHONPATH=. pytest test_main.py'  // Pokreće testove za core
+                    }}
+
+                    echo "Running frontend tests..."
+                    dir('frontend') {{
+                        sh 'PYTHONPATH=.:$PWD pytest test_app.py'  // Pokreće testove za frontend
+                    }}
+                }}
+            }}
+        }}
+
 	stage('Run Services') {{
             steps {{
                 script {{
                     // Pokreni core i frontend servise
                     {generate_run_script()}
+                }}
+            }}
+        }}
+
+	stage('Deploy') {{
+            steps {{
+                script {{
+                    {generate_deploy_script()}
                 }}
             }}
         }}

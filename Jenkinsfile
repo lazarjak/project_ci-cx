@@ -8,18 +8,15 @@ pipeline {
     }
 
     stages {
-
 	stage('Checkout Repositories') {
 	    steps {
 		script {
 		    
         	echo "Cloning core..."
-        	sh 'rm -rf core'
-		sh 'git clone -b master https://github.com/lazarjak/core.git || exit 1'
+        	git clone -b main https://github.com/lazarjak/core.git || exit 1
         
         	echo "Cloning frontend..."
-        	sh 'rm -rf frontend'
-		sh 'git clone -b master https://github.com/lazarjak/frontend.git || exit 1'
+        	git clone -b develop https://github.com/lazarjak/frontend.git || exit 1
         
 		}
 	    }
@@ -30,10 +27,11 @@ pipeline {
                 script {
                     // Generisanje artefakata
                     
-        	    echo "Building core-service..."
+        	echo "Building core-service..."
+        	# Build komanda za py
         
-        	    echo "Building frontend-bundle..."
-        	
+        	echo "Building frontend-bundle..."
+        	# Build komanda za zip
         
                 }
             }
@@ -60,39 +58,33 @@ pipeline {
                 script {
                     // Pokreni core i frontend servise
                     
-    		    echo "Running core service..."
-   		    sh '''
-			 cd core
-   			 python3 main.py || exit 1  # Pokreće main.py iz core repozitorijuma
+   		    echo "Running core service..."
+    		    cd core
+    		    python3 main.py || exit 1  # Pokreće main.py iz core repozitorijuma
 
-   		    '''
-
-
-    		    echo "Running frontend service..."
-   		    sh '''	
-			 cd frontend
-   			 python3 app.py || exit 1  # Pokreće app.py iz frontend repozitorijuma
-    		    '''
+		    echo "Running frontend service..."
+		    cd frontend
+		    python3 app.py || exit 1  # Pokreće app.py iz frontend repozitorijuma
+    
                 }
             }
         }
-	
+
 	stage('Deploy') {
             steps {
                 script {
-		    // Clean up existing container
-		    sh '''
+                    
+    		// Clean up existing container
+	 	   echo "Cleaning up old Docker container..."
+ 		   docker rm -f my-app-container || { echo "Failed to remove old container"; exit 1; }
 
-                           
-                           docker rm -f my-app-container || { echo "Failed to remove old container"; exit 1; }
-                       
-                    '''
-                    // Pokreće aplikaciju u Docker kontejneru
-                    sh 'docker run -d -p 5001:8080 --name my-app-container my-app'
+ 	       // Pokreće aplikaciju u Docker kontejneru
+		   echo "Deploying new container..."
+    		   docker run -d -p 5001:8080 --name my-app-container my-app || exit 1
+    
                 }
             }
         }
-
     }
 }
 
