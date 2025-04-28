@@ -81,12 +81,12 @@ pipeline {
             steps {
                 script {
 		    // Clean up existing container
-		    //sh '''
+		    sh '''
 
                            
-                          //  docker rm -f my-app-container || { echo "Failed to remove old container"; exit 1; }
+                           docker rm -f my-app-container || { echo "Failed to remove old container"; exit 1; }
                        
-                   // '''
+                    '''
                     // Pokreće aplikaciju u Docker kontejneru
                     sh 'docker run -d -p 5001:8080 --name my-app-container my-app'
                 }
