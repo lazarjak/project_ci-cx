@@ -12,11 +12,11 @@ pipeline {
 	    steps {
 		script {
 		    
-        	echo "Cloning core..."
-        	git clone -b main https://github.com/lazarjak/core.git || exit 1
+	        	echo "Cloning core..."
+	        	git clone -b main https://github.com/lazarjak/core.git || exit 1
         
-        	echo "Cloning frontend..."
-        	git clone -b develop https://github.com/lazarjak/frontend.git || exit 1
+	        	echo "Cloning frontend..."
+	        	git clone -b develop https://github.com/lazarjak/frontend.git || exit 1
         
 		}
 	    }
@@ -27,11 +27,11 @@ pipeline {
                 script {
                     // Generisanje artefakata
                     
-        	echo "Building core-service..."
-        	# Build komanda za py
+	        	echo "Building core-service..."
+	        	# Build komanda za py
         
-        	echo "Building frontend-bundle..."
-        	# Build komanda za zip
+	        	echo "Building frontend-bundle..."
+	        	# Build komanda za zip
         
                 }
             }
