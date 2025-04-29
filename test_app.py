@@ -1,14 +1,15 @@
 from app import main
-import builtins
-import io
+import sys
+from io import StringIO
+import pytest
 
-def test_main_output(monkeypatch):
-    # Pravimo lažni "stdout"
-    fake_out = io.StringIO()
-    monkeypatch.setattr(builtins, 'print', lambda msg: fake_out.write(msg))
+def test_main():
+	captured_output = StringIO()
+	sys.stdout = captured_output  # Preusmeravaš stdout kako bi uhvatio ispis
 
-    # Pokrećemo main funkciju
-    main()
+	main()  # Pozivaš funkciju main() koju želiš da testiraš
 
-    # Dobijeni izlaz upoređujemo sa očekivanim
-    assert fake_out.getvalue() == "Hello world"
+	sys.stdout = sys.__stdout__  # Vraćaš stdout u originalno stanje
+
+   	# Proveravaš da li je ispisano ono što očekuješ
+	assert captured_output.getvalue().strip() == "Hello world"

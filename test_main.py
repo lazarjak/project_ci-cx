@@ -1,8 +1,7 @@
 import pytest
 from io import StringIO
 import sys
-from main import main   #Importujemo funkciju main() iz main.py
-
+from main import main
 
 def test_main():
 
